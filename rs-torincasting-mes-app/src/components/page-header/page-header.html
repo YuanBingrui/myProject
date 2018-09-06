@@ -1,0 +1,27 @@
+<div class="page-header-box">
+  <div class="page-header-box-col col-right">
+    <strong>班组：</strong>{{ headerInfo.bz }}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <strong>操作人：</strong>{{ headerInfo.czr }}
+  </div>
+  <div class="page-header-box-col col-middle">
+    <ion-slides autoplay="2000" direction="vertical" loop>
+      <ion-slide
+        *ngFor="let noticeone of headerInfo.noticeInfo">
+        <h3>{{noticeone.content}}</h3>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="page-header-box-col">
+    <ion-item>
+      <ion-label color="primary">计划日期：</ion-label>
+      <ion-datetime
+        [(ngModel)]="headerInfo.planDate"
+        displayFormat="YYYY-MM-DD"
+        cancelText="取消"
+        doneText="确定"
+        (ionChange)="dateTimeChange(headerInfo.planDate)">
+      </ion-datetime>
+    </ion-item>
+  </div>
+</div>

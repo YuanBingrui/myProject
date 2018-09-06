@@ -1,0 +1,103 @@
+my-alert {
+  .alter-box-cover {
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 200;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    transform: translateZ(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .alter-box {
+      border-radius: 10px;
+      background-color: #fff;
+      width: 35%;
+      height: 60%;
+      font-size: 2rem;
+      .alter-box-header {
+        height: 7%;
+        border-bottom: 0.55px rgba(0, 128, 128, .9) solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .alter-box-content {
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2rem;
+        overflow-y: auto;
+        .table-box {
+          width: 100%;
+          margin: 0.2rem auto;
+          padding: 0.5rem 0;
+          & ion-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .table-box-header {
+            position: sticky;
+            display: flex;
+            width: 100%;
+            color: var(--primary-color);
+            border-top: 0.55px solid var(--primary-color);
+            border-bottom: 0.55px solid var(--primary-color);
+            & ion-col {
+              //padding: 17px 0;
+              // margin: 0 4px;
+              flex-grow: 2 !important;
+            }
+          }
+          .table-line {
+            width: 100%;
+            & ion-col {
+              //padding: 7px 0;
+              // margin: 0 4px;
+              flex-grow: 2 !important;
+            }
+            &:nth-child(even) {
+              background-color: #fff;
+            }
+            &:nth-child(odd) {
+              background-color: rgba(0, 128, 128, .3);
+            }
+            & button {
+              width: 80%;
+            }
+          }
+        }
+      }
+      .alter-box-footer {
+        height: 13%;
+        border-top: 1px rgba(0, 128, 128, .9) solid;
+        display: flex;
+        justify-content: space-between;
+        .alter-button {
+          flex: 0 0 50%;
+          height: 100%;
+          background-color: #fff;
+          font-size: inherit;
+          color: var(--primary-color);
+          &:active {
+            background-color: #f3f3f3;
+          }
+        }
+        .alter-button-confirm {
+          border-bottom-left-radius: 10px;
+          border-right: 0.5px rgba(0, 128, 128, .9) solid;
+        }
+        .alter-button-cancel {
+          border-bottom-right-radius: 10px;
+          border-left: 0.5px rgba(0, 128, 128, .9) solid;
+        }
+      }
+    }
+  }
+}

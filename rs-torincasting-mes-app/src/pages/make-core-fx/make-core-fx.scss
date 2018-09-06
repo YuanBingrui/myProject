@@ -1,0 +1,19 @@
+page-make-core-fx {
+  $primary-color: var(--primary-color);
+  ion-content {
+    background-color: #f3f3f3 !important;
+  }
+  .making-core-fx-row {
+    background-color: #fff;
+    margin: 5px 0;
+  }
+  .making-core-fx-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    & button {
+      width: 30% !important;
+    }
+  }
+}

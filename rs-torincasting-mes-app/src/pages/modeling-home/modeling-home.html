@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle="menuList">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>造型检验</ion-title>
+    <ion-buttons end>
+      <my-timer></my-timer>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <page-header [headerInfo]="headerInfo" (dateChange)="planDateFilter($event)"></page-header>
+  <div class="modeling-box-content">
+    <div class="modeling-box-content-top">
+      <div class="content-top-col content-top-left">
+        <ion-item>
+          <ion-label color="primary"><strong>组别：</strong></ion-label>
+          <ion-select
+            color="primary"
+            [selectOptions]="{title: '组别'}"
+            cancelText="取消"
+            okText="确认"
+            [(ngModel)]="teamLabel"
+            (ionChange)="changeTeamLabel()">
+            <ion-option
+              *ngFor="let teamLabelItem of teamLabelList"
+              [value]="teamLabelItem.GWID">
+              {{ teamLabelItem.GWMC }}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="content-top-col content-top-right">
+        <button ion-button round>提交</button>
+      </div>
+    </div>
+    <div class="modeling-box-content-bottom">
+      <div class="table-box">
+        <ion-list>
+          <div class="table-box-header">
+            <ion-label
+              *ngFor="let tableTitleone of tableTitle">
+              {{ tableTitleone.name }}
+            </ion-label>
+          </div>
+          <ion-item-sliding
+            #itemSliding
+            *ngFor="let modelingDataone of modelingData; let i = index ">
+            <ion-item
+              class="table-line"
+              [ngClass]="{ 'is-qualified': modelingDataone.JYJG === 'N' }">
+              <ion-label
+              *ngFor="let tableTitleone of tableTitle">
+                <span
+                  *ngIf="tableTitleone.id !== 'JY' && tableTitleone.id !== 'CL'">
+                  {{ modelingDataone[tableTitleone.id] }}
+                </span>
+                <span
+                  *ngIf="tableTitleone.id === 'CL'">
+                  {{ clStatus[modelingDataone[tableTitleone.id]] }}
+                </span>
+                <button
+                  *ngIf="tableTitleone.id === 'JY'"
+                  ion-button
+                  (click)="goToExaminePage(modelingDataone)">
+                  {{ modelingDataone[tableTitleone.id] }}
+                </button>
+              </ion-label>
+            </ion-item>
+            <ion-item-options>
+              <button *ngIf="modelingDataone.JYJG === 'N' && modelingDataone.CL !== 'Y'" ion-button (click)="modelingFX(itemSliding, modelingDataone, 'Y')">放行</button>
+              <button *ngIf="modelingDataone.CL === 'Y'" ion-button (click)="modelingFX(itemSliding, modelingDataone, 'N')" color="danger">取消放行</button>
+              <button *ngIf="modelingDataone.CL === 'Y'" ion-button (click)="modelingFX(itemSliding, modelingDataone, 'V')" color="info">查看处理结果</button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+</ion-content>
+

@@ -1,0 +1,33 @@
+page-header {
+  .page-header-box {
+    background-color: #fff;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.7rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    .page-header-box-col {
+      width: 33.33%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--primary-color);
+    }
+    .col-right {
+      font-size: 1.7rem;
+    }
+    .col-middle {
+      color: #fff;
+      border-radius: 2px;
+      background: linear-gradient(to right, #348f50, #56b4d3);
+    }
+    & .item-md,.item-ios {
+      color: var(--primary-color);
+    }
+    & .item-inner {
+      border-bottom: 0.55px solid var(--primary-color) !important;
+    }
+  }
+}

@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>制芯检验</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="making-core-examine-box">
+    <div class="making-core-examine-box-row making-core-examine-box-top">
+      <div class="making-core-examine-box-top-col making-core-examine-box-top-left">
+        <ion-item>
+          <ion-label color="primary">
+            <strong>样本：</strong>
+          </ion-label>
+          <ion-select
+            cancelText="取消"
+            okText="确认"
+            [(ngModel)]="newAddSample"
+            (ionChange)="changeSample()">
+            <ion-option
+              *ngFor="let newAddSampleItem of newAddSampleList"
+              [value]="newAddSampleItem.YB">
+              {{ newAddSampleItem.YB }}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="making-core-examine-box-top-col making-core-examine-box-top-center">
+        <ion-item>
+          <ion-label color="primary">
+            <strong>物料编码：</strong>
+          </ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="materialID"
+            readonly>
+          </ion-input>
+        </ion-item>
+      </div>
+      <div class="making-core-examine-box-top-col">
+        <button
+          ion-button
+          round
+          (click)="addNewExamineSample()">
+          新增样本
+        </button>
+        <button
+          ion-button
+          round
+          (click)="takingPhoto()">
+          拍照
+        </button>
+      </div>
+    </div>
+    <div class="making-core-examine-box-row making-core-examine-box-bottom">
+      <div class="table-box">
+        <ion-grid>
+          <ion-row>
+            <div class="table-box-header">
+              <ion-col
+                *ngFor="let tableTitleone of tableTitle">
+                {{ tableTitleone.name }}
+              </ion-col>
+            </div>
+          </ion-row>
+          <ion-row
+            class="table-line"
+            *ngFor="let examineDataone of examineData; let i = index ">
+            <ion-col
+              *ngFor="let tableTitleone of tableTitle">
+              <span
+                *ngIf="tableTitleone.id !== 'JYJG'">
+                {{ examineDataone[tableTitleone.id] }}
+              </span>
+              <span
+                *ngIf="tableTitleone.id === 'JYJG'"
+                class="status-icon"
+                [ngClass]="{ 'status-uncheck-icon': examineDataone[tableTitleone.id] === '', 'status-ok-icon': examineDataone[tableTitleone.id] === 'Y', 'status-no-icon': examineDataone[tableTitleone.id] === 'N' }"
+                (click)="checkResult(i, examineDataone.SFPZ, examineDataone.ZPCZ)">
+                <div
+                  class="select-box"
+                  [hidden]="presentIndex !== i || examineDataone.SFPZ === 'Y'">
+                  <span
+                    class="option-box option-uncheck-icon"
+                    (click)="selectedOption('')"></span>
+                  <span
+                    class="option-box option-ok-icon"
+                    (click)="selectedOption('Y')"></span>
+                  <span
+                    class="option-box option-no-icon"
+                    (click)="selectedOption('N')"></span>
+                </div>
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+  <div class="making-core-examine-btn-box">
+    <button ion-button round block (click)="dismissApply()">取消</button>
+    <button ion-button round block (click)="confirmApply()">确定</button>
+  </div>
+</ion-content>

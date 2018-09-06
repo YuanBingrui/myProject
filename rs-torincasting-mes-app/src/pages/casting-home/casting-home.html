@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle="menuList">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>浇铸作业反馈（一部）</ion-title>
+    <ion-buttons end>
+      <my-timer></my-timer>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <page-header
+    [headerInfo]="headerInfo"
+    (dateChange)="planDateFilter($event)">
+  </page-header>
+  <div class="casting-box-content">
+    <div class="table-box">
+      <ion-list>
+        <div class="table-box-header">
+          <ion-label
+            *ngFor="let tableTitleone of tableTitle">
+            {{ tableTitleone.name }}
+          </ion-label>
+        </div>
+        <ion-item-sliding
+          #itemSliding
+          *ngFor="let castingItem of castingList; let i = index ">
+          <ion-item class="table-line">
+            <ion-label
+              *ngFor="let tableTitleone of tableTitle">
+              <span
+                *ngIf="tableTitleone.id !== 'CZ' && tableTitleone.id !== 'JHSL' && tableTitleone.id !== 'WD' && tableTitleone.id !== 'SJSJ' && tableTitleone.id !== 'ZJSJ'">
+                {{ castingItem[tableTitleone.id] }}
+              </span>
+              <ion-select
+                [selectOptions]="{title: '数量'}"
+                *ngIf="tableTitleone.id === 'JHSL'"
+                cancelText="取消"
+                okText="确认"
+                [(ngModel)]="castingItem[tableTitleone.id].value">
+                <ion-option
+                  *ngFor="let optionone of castingItem[tableTitleone.id].options"
+                  [value]="optionone">
+                  {{ optionone }}
+                </ion-option>
+              </ion-select>
+              <button
+                *ngIf="tableTitleone.id === 'WD'"
+                ion-button
+                (click)="eventOperation('WD', i)">
+                {{ castingItem[tableTitleone.id] }}
+              </button>
+              <button
+                *ngIf="tableTitleone.id === 'SJSJ'"
+                ion-button
+                [innerHTML]="castingItem[tableTitleone.id]"
+                (click)="eventOperation('SJSJ', i)">
+                <!-- {{ castingItem[tableTitleone.id] }} -->
+              </button>
+              <button
+                *ngIf="tableTitleone.id === 'ZJSJ'"
+                ion-button
+                [innerHTML]="castingItem[tableTitleone.id]"
+                (click)="eventOperation('ZJSJ', i)">
+                <!-- {{ castingItem[tableTitleone.id] }} -->
+              </button>
+              <button
+                *ngIf="tableTitleone.id === 'CZ'"
+                ion-button
+                round
+                (click)="eventOperation('CZ', i)">
+                {{ castingItem[tableTitleone.id] }}
+              </button>
+            </ion-label>
+          </ion-item>
+          <ion-item-options>
+            <button ion-button (click)="gltbOpration(itemSliding, i)">隔离提报</button>
+            <button ion-button (click)="gotoDocumentList(itemSliding, i)" color="secondary">作业标准书</button>
+            <button ion-button (click)="inquireHistoryQuestion(itemSliding, i)" color="info">历史质量问题</button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+  </div>
+  <my-modal
+    [isModal]="isModal"
+    [modalTitle]="modalTitle"
+    [beginTemperature]="beginTemperature"
+    [temperatureMeasuringGun]="specTemperature"
+    (getTemperature)="getSpecTemperature($event)"
+    (modalConfirm)="modalConfirm($event)"
+    (modalCancel)="modalCancel()">
+  </my-modal>
+  <my-alert
+    [isAlert]="isAlert"
+    [snTitle]="snTitle"
+    [serialNumber]="serialNumber"
+    (getStartTime)="getAlterStartTime($event)"
+    (getEndTime)="getAlterEndTime($event)"
+    (alterConfirm)="alterConfirm()"
+    (alterCancel)="alterCancel()">
+  </my-alert>
+</ion-content>

@@ -1,0 +1,158 @@
+page-modeling-examine {
+  $primary-color: var(--primary-color);
+  ion-content {
+    background-color: #f3f3f3 !important;
+  }
+  .modeling-examine-box {
+    .modeling-examine-box-row {
+      width: 100%;
+      background-color: #fff;
+      padding: 0.5rem;
+      margin-top: 0.7rem;
+      font-size: 2rem;
+    }
+    &-top {
+      height: 7rem;
+      display: flex;
+      align-items: center;
+      &-col {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+          width: 30%;
+        }
+      }
+      &-left {
+        width: 15%;
+      }
+      &-center {
+        width: 55%;
+        text-align: right;
+      }
+      &-center .text-input {
+        text-align: right;
+      }
+    }
+    &-bottom {
+      .table-box {
+        width: 100%;
+        margin: 0.2rem auto;
+        padding: 0.5rem 0;
+        ion-col {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .text-input {
+            text-align: center;
+          }
+        }
+        .table-box-header {
+          display: flex;
+          width: 100%;
+          color: var(--primary-color);
+          border-top: 0.55px solid var(--primary-color);
+          border-bottom: 0.55px solid var(--primary-color);
+          ion-col {
+            padding: 17px 0;
+            flex-grow: 2 !important;
+            &:nth-child(1), &:nth-child(7) {
+              flex-grow: 1 !important;
+            }
+          }
+        }
+        .table-line {
+          ion-col {
+            padding: 12px 0;
+            flex-grow: 2 !important;
+            &:nth-child(1), &:nth-child(7) {
+              flex-grow: 1 !important;
+            }
+          }
+          &:nth-child(even) {
+            background-color: #fff;
+          }
+          &:nth-child(odd) {
+            background-color: rgba(0, 128, 128, .3);
+          }
+          @mixin icon-font {
+            font-family: "iconfont" !important;
+            font-size: 2rem;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+          .status-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+          }
+          .status-ok-icon:before { 
+            content: "\e60b";
+            @include icon-font;
+          }
+          .status-uncheck-icon:before { 
+            content: "\e644";
+            @include icon-font;
+          }
+          .status-no-icon:before { 
+            content: "\e618";
+            @include icon-font;
+          }
+          .status-icon:after {
+            content: "\e60c";
+            @include icon-font;
+            font-size: 1rem;  
+            margin-left: 1rem;
+          }
+          .select-box {
+            position: absolute;
+            left: -47%;
+            top: 100%;
+            background-color: #f3f3f3;
+            border-radius: 1.5rem;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 7rem;
+            z-index: 200;
+            .option-box {
+              background-color: $primary-color;
+              border-radius: 0.9rem;
+              margin: 0.4rem 0;
+              &:hover {
+                background-color: rgba(0, 128, 128, .9);
+              }
+            }
+            .option-uncheck-icon:before {
+              content: "\e644";
+              @include icon-font;
+              color: #fff;
+            }
+            .option-ok-icon:before { 
+              content: "\e60b";
+              @include icon-font;
+              color: #fff;
+            }
+            .option-no-icon:before { 
+              content: "\e618";
+              @include icon-font;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .modeling-examine-btn-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    button{
+      margin: 0 200px;
+    }
+  }
+}

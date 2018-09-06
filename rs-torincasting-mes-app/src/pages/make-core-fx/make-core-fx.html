@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>检验放行</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="making-core-fx-row">
+      <ion-col *ngFor="let labelItem of labelList">
+        <ion-item>
+          <ion-label color="primary">{{ labelItem.name }}</ion-label>
+          <ion-input [(ngModel)]="selectedMakingCoreData[labelItem.id]" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label color="primary">组别</ion-label>
+          <ion-input [(ngModel)]="userTeam" readonly></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="making-core-fx-row">
+      <ion-col>
+        <ion-item>
+          <ion-label color="primary">放行意见</ion-label>
+          <ion-textarea [(ngModel)]="FXidea" placeholder="请输入放行意见" rows="7" [readonly]="type === 'V'"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="making-core-fx-btn">
+        <button ion-button round (click)="confirmApply()" [disabled]="type === 'V'">确认</button>
+      </ion-col>
+      <ion-col class="making-core-fx-btn">
+        <button ion-button round (click)="dismissApply()" [disabled]="type === 'V'">取消</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

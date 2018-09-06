@@ -1,0 +1,53 @@
+page-history-question {
+  .history-question-box {
+    width: 100%;
+    background-color: #f3f3f3;
+    .table-box {
+      width: 100%;
+      margin: 0.2rem auto;
+      padding: 0.5rem 0;
+      & ion-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & .text-input {
+          text-align: center;
+        }
+      }
+      .table-box-header {
+        display: flex;
+        width: 100%;
+        color: var(--primary-color);
+        border-top: 0.55px solid var(--primary-color);
+        border-bottom: 0.55px solid var(--primary-color);
+        & ion-col {
+          padding: 18px 0;
+          // margin: 0 4px;
+          flex-grow: 2 !important;
+          &:first-child {
+            flex-grow: 1 !important;
+          }
+        }
+      }
+      .table-line {
+        & ion-col {
+          padding: 17px 0;
+          // margin: 0 4px;
+          flex-grow: 2 !important;
+          &:first-child {
+            flex-grow: 1 !important;
+          }
+        }
+        & ion-select {
+          max-width: 100%;
+        }
+        &:nth-child(even) {
+          background-color: #fff;
+        }
+        &:nth-child(odd) {
+          background-color: rgba(0, 128, 128, .3);
+        }
+      }
+    }
+  }
+}

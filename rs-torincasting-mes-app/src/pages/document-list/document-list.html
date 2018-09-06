@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{ pageTitle }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="document-list-box">
+    <div class="table-box">
+      <ion-grid>
+        <ion-row>
+          <div class="table-box-header">
+            <ng-container
+              *ngFor="let tableTitleone of tableTitle">
+              <ion-col>
+                {{ tableTitleone.name }}
+              </ion-col>
+            </ng-container>
+          </div>
+        </ion-row>
+        <ion-row
+          class="table-line"
+          *ngFor="let documentItem of documentList; let i = index ">
+          <ng-container
+            *ngFor="let tableTitleone of tableTitle">
+            <ion-col *ngIf="tableTitleone.id !== 'CZ'">
+              <span>{{ documentItem[tableTitleone.id] }}</span>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'CZ'">
+              <span (click)="downloadDoc(documentItem)">
+                {{ documentItem[tableTitleone.id] }}
+                <ion-icon name="cloud-download"></ion-icon></span>
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

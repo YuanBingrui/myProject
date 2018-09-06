@@ -1,0 +1,17 @@
+page-setting-server {
+  .presentServer {
+    margin-top: 1rem;
+    padding: 1.2rem 0;
+    background-color: #fff;
+  }
+  .historyServerLabel {
+    padding: 1rem 1rem 0.7rem 1rem; 
+  }
+  .historyServer {
+    background-color: #fff;
+    padding: 10px 0;
+    ion-list {
+      margin: 0 !important;
+    }
+  }
+}

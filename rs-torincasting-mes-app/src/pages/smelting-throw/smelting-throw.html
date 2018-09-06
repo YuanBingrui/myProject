@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>已投物料明细</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="smelting-throw-box">
+    <div class="table-box">
+      <ion-grid>
+        <ion-row>
+          <div class="table-box-header">
+            <ng-container
+              *ngFor="let tableTitleone of tableTitle">
+              <ion-col>
+                {{ tableTitleone.name }}
+              </ion-col>
+            </ng-container>
+          </div>
+        </ion-row>
+        <ion-row
+          class="table-line"
+          *ngFor="let tlmxItem of tlmxList; let i = index ">
+          <ng-container
+            *ngFor="let tableTitleone of tableTitle">
+            <ion-col
+              *ngIf="tableTitleone.id !== 'XZ'">
+              <span>
+                {{ tlmxItem[tableTitleone.id] }}
+              </span>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'XZ'">
+              <ion-checkbox
+                [(ngModel)]="tlmxItem[tableTitleone.id]">
+              </ion-checkbox>
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div class="smelting-throw-btn-box">
+    <button ion-button round block (click)="confirmApply()">删除</button>
+    <button ion-button round block (click)="dismissApply()">取消</button>
+  </div>
+</ion-content>

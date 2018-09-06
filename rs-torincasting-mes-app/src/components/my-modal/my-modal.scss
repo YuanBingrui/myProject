@@ -1,0 +1,110 @@
+my-modal {
+  .modal-box-cover {
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 200;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    transform: translateZ(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .modal-box {
+      border-radius: 10px;
+      background-color: #fff;
+      width: 40%;
+      height: 50%;
+      font-size: 2rem;
+      .modal-box-header {
+        height: 20%;
+        border-bottom: 0.55px rgba(0, 128, 128, .9) solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-box-content {
+        height: 64%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2rem;
+        padding: 0 2%;
+        overflow-y: auto;
+        &-top {
+          display: flex;
+          align-items: center;
+          margin-top: 3%;
+          .modal-input-box {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            display: flex;
+            input{
+              border: 0;
+              text-align: center;
+              border-bottom: 1px rgba(0, 128, 128, .9) solid;
+            }
+            &:after {
+              content: '℃'
+            }
+          }
+          .modal-button-manual {
+            background-color: var(--primary-color);
+            padding: 11px 8px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 20px;
+            margin-left: 15px;
+          }
+        }
+        .modal-btns-box {
+          display: flex;
+          flex-wrap: nowrap;
+          margin-bottom: 5%;
+          & button{
+            background-color: var(--primary-color);
+            padding: 11px 8px;
+            font-size: inherit;
+            color: #fff;
+            margin: 4px;
+            border-radius: 20px;
+            white-space: wrap;
+            box-sizing: border-box;
+            &:focus {
+              background-color: #fff;
+              color: var(--primary-color);
+              border: 1px var(--primary-color) solid;
+            }
+          }
+        }
+      }
+      .modal-box-footer {
+        height: 16%;
+        border-top: 1px rgba(0, 128, 128, .9) solid;
+        display: flex;
+        justify-content: space-between;
+        .modal-button {
+          flex: 0 0 50%;
+          height: 100%;
+          background-color: #fff;
+          font-size: inherit;
+          color: var(--primary-color);
+          &:active {
+            background-color: #f3f3f3;
+          }
+        }
+        .modal-button-confirm {
+          border-bottom-left-radius: 10px;
+          border-right: 0.5px rgba(0, 128, 128, .9) solid;
+        }
+        .modal-button-cancel {
+          border-bottom-right-radius: 10px;
+          border-left: 0.5px rgba(0, 128, 128, .9) solid;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<div class="modal-box-cover" *ngIf="_isModal">
+  <div class="modal-box">
+    <div class="modal-box-header">{{ modalTitle.title }}</div>
+    <div class="modal-box-content">
+      <div class="modal-box-content-top">
+        <div class="modal-input-box">
+          <label for="sjwd">{{ modalTitle.label }}：</label>
+          <input
+            type="number"
+            name="sjwd"
+            id="sjwd"
+            pattern="[0-9]*"
+            [(ngModel)]="_beginTemperature.WD"
+            [disabled]="isDisabled">
+        </div>
+        <button
+          class="modal-button-manual"
+          (click)="manualInput()">
+          手动输入
+        </button>
+      </div>
+      <div class="modal-btns-box">
+        <button
+          *ngFor="let temperatureMeasuringGunone of temperatureMeasuringGun"
+          (click)="getSpecTemperature(temperatureMeasuringGunone.id)"
+          [innerHTML]="temperatureMeasuringGunone.name">
+        </button>
+      </div>
+    </div>
+    <div class="modal-box-footer">
+      <button
+        class="modal-button modal-button-confirm"
+        (click)="myModalConfirm(_beginTemperature)">
+        确定
+      </button>
+      <button
+        class="modal-button modal-button-cancel"
+        (click)="myModalCancel()">
+        取消
+      </button>
+    </div>
+  </div>
+</div>

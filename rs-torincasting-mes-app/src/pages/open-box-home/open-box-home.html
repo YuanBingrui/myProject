@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle="menuList">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>开箱作业反馈（一部）</ion-title>
+    <ion-buttons end>
+      <my-timer></my-timer>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <page-header [headerInfo]="headerInfo" (dateChange)="planDateFilter($event)"></page-header>
+  <div class="openbox-box-content">
+    <div class="table-box">
+      <ion-list>
+        <div class="table-box-header">
+          <ion-label
+            *ngFor="let tableTitleone of tableTitle">
+            {{ tableTitleone.name }}
+          </ion-label>
+        </div>
+        <ng-container
+          *ngFor="let openBoxDataone of openBoxData; let i = index ">
+          <ion-item
+            class="table-line"
+            [ngClass]="{ 'is-qualified': openBoxDataone.BHG === 'Y' }">
+            <ion-label
+            *ngFor="let tableTitleone of tableTitle">
+              <span
+                *ngIf="tableTitleone.id !== 'SJKXSJ'">
+                {{ openBoxDataone[tableTitleone.id] }}
+              </span>
+              <button
+                *ngIf="tableTitleone.id === 'SJKXSJ'"
+                ion-button
+                (click)="getOpenBoxTime(i)"
+                [innerHTML]="openBoxDataone[tableTitleone.id]">
+              </button>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

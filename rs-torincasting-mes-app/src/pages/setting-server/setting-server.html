@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons start>
+      <button
+        ion-button
+        (click)="dismissSettingServer()">
+        取消
+      </button>
+    </ion-buttons>
+    <ion-title>设置服务器</ion-title>
+    <ion-buttons end>
+      <button
+        ion-button
+        (click)="applySettingServer()">
+        保存
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #f3f3f3;">
+	<div class="presentServer">
+		<ion-item>
+    	<ion-label
+        floating
+        color="primary">
+        服务器地址
+      </ion-label>
+    	<ion-input
+        [(ngModel)]="serverInfo.server"
+        name="server"
+        type="text"
+        style="color:var(--primary-color);"
+        required
+        clearInput>
+      </ion-input>
+  	</ion-item>
+	</div>
+	<div
+    *ngIf="historyServer.length !== 0"
+    class="historyServerLabel">
+    历史服务器
+  </div>
+  <div class="historyServer">
+  	<ion-list>
+    	<ion-item
+        *ngFor="let historyServerone of historyServer; let i=index; " 
+        (click)="changePresentServer(historyServerone)">
+    		<ion-icon
+          name="ios-time-outline"
+          item-start>
+        </ion-icon>
+    		{{historyServerone}}
+    		<ion-icon
+          name="close"
+          item-end
+          (click)="deleteServer(i)">
+        </ion-icon>
+    	</ion-item>
+		</ion-list>
+  </div>
+</ion-content>

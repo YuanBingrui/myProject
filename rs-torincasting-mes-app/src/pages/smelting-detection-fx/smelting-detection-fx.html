@@ -1,0 +1,254 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle="menuList">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>熔炼检测放行（一部）</ion-title>
+    <ion-buttons end>
+      <my-timer></my-timer>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="page-header-box">
+    <div class="page-header-box-col">
+      <ion-item>
+        <ion-label color="primary">计划日期：</ion-label>
+        <ion-datetime
+          [(ngModel)]="planDate"
+          displayFormat="YYYY-MM-DD"
+          cancelText="取消"
+          doneText="确定"
+          (ionChange)="planDateFilter()">
+        </ion-datetime>
+      </ion-item>
+    </div>
+    <div class="page-header-box-col">
+      <ion-item>
+        <ion-label color="primary">筛选条件：</ion-label>
+        <ion-select
+          color="primary"
+          [selectOptions]="{title: '筛选条件'}"
+          cancelText="取消"
+          okText="确认"
+          [(ngModel)]="fangxingStatus"
+          (ionChange)="changeFangxingStatus()">
+          <ion-option
+            *ngFor="let fangxingStatusOptionone of fangxingStatusOptions"
+            [value]="fangxingStatusOptionone.id">
+            {{ fangxingStatusOptionone.name }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+  <div class="smelting-detection-box">
+    <div class="smelting-detection-box-top">
+      <div
+        class="smelting-furnace-box"
+        *ngFor="let furnaceItem of furnaceArr; let i = index">
+        <div
+          class="furnace-box"
+          [ngClass]="{ 'is-selected-furnace': furnaceItem.id === isFurnace }"
+          (click)="selectedFurnace(furnaceItem.id, i)">
+          {{ furnaceItem.name }}
+        </div>
+        <div class="plans-box">
+          <ion-row>
+            <ion-col>
+              <ion-select
+                [selectOptions]="{title: '计划'}"
+                cancelText="取消"
+                okText="确认"
+                [disabled]="presentIndex !== i"
+                [(ngModel)]="furnaceItem.plans.value"
+                (ionChange)="getSmeltingDetectionInfo(furnaceItem.plans.value, i)">
+                <ion-option
+                  *ngFor="let optionone of furnaceItem.plans.options"
+                  [value]="optionone">
+                  {{ optionone }}
+                </ion-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </div>
+    <div class="smelting-detection-box-middle">
+      <div class="temperature-pick-box">
+        <div
+          class="temperature-pick-box-col"
+          *ngFor="let pickTemperatureone of pickTemperatures">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-5>
+                <ion-list inset>
+                  <ion-item>
+                    <ion-label color="primary">
+                      <strong>&nbsp;{{ pickTemperatureone.name }}&nbsp;：</strong>
+                    </ion-label>
+                    <ion-input
+                      type="text"
+                      [(ngModel)]="pickTemperatureone.value"
+                      readonly>
+                    </ion-input>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+              <ion-col col-7>
+                <ion-list inset>
+                  <ion-item>
+                    <ion-label color="primary">
+                      <strong>&nbsp;{{ pickTemperatureone.pickTimeName }}&nbsp;：</strong>
+                    </ion-label>
+                    <ion-input
+                      type="text"
+                      [(ngModel)]="pickTemperatureone.pickTime"
+                      readonly>
+                    </ion-input>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </div>
+    <div class="smelting-detection-box-bottom">
+      <div class="bottom-header">
+        <ion-list inset>
+          <ion-item>
+            <ion-label color="primary">
+              <strong>&nbsp;铁水牌号&nbsp;：</strong>
+            </ion-label>
+            <ion-input type="text" [(ngModel)]="ironWaterId" readonly></ion-input>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div padding>
+        <ion-segment [(ngModel)]="analyzeType">
+          <ion-segment-button value="GPFX">
+            光谱分析
+          </ion-segment-button>
+          <ion-segment-button value="RFX">
+            热分析
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <div [ngSwitch]="analyzeType">
+        <div *ngSwitchCase="'GPFX'">
+          <div class="analyze-box" *ngIf="spectrumTableTitle.length">
+            <div class="analyze-box-label">
+              光谱标准
+            </div>
+            <div class="analyze-box-table">
+              <table>
+                <tr>
+                  <th
+                    *ngFor="let spectrumTableTitleone of spectrumTableTitle">
+                    {{ spectrumTableTitleone.name }}
+                  </th>
+                </tr>
+                <tr
+                  *ngFor="let spectrumStandardDataone of spectrumStandardData">
+                  <td
+                    *ngFor="let spectrumTableTitleone of spectrumTableTitle">
+                    {{ spectrumStandardDataone[spectrumTableTitleone.id] }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="analyze-box" *ngIf="spectrumTableTitle.length">
+            <div class="table-box">
+              <table>
+                <tr>
+                  <th
+                    *ngFor="let spectrumDetectTableTitleCol of spectrumDetectTableTitle"
+                    [hidden]="spectrumDetectTableTitleCol.id === 'XLH' || spectrumDetectTableTitleCol.id === 'BHG' || spectrumDetectTableTitleCol.id === 'LCBH'">
+                    {{ spectrumDetectTableTitleCol.name }}
+                  </th>
+                </tr>
+                <tr
+                  *ngFor="let spectrumDetectDataone of spectrumDetectData"
+                  [ngClass]="{ isQualified: spectrumDetectDataone.BHG }">
+                  <td
+                    *ngFor="let spectrumDetectTableTitleCol of spectrumDetectTableTitle"
+                    [hidden]="spectrumDetectTableTitleCol.id === 'XLH' || spectrumDetectTableTitleCol.id === 'BHG' || spectrumDetectTableTitleCol.id === 'LCBH'">
+                    {{ spectrumDetectDataone[spectrumDetectTableTitleCol.id] }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="tips-info-box" *ngIf="spectrumTableTitle.length">
+            红色显示的为不合格
+          </div>
+        </div>
+        <div *ngSwitchCase="'RFX'">
+          <div class="analyze-box" *ngIf="hotTableTitle.length">
+            <div class="analyze-box-label">
+              热分析标准
+            </div>
+            <div class="analyze-box-table">
+              <table>
+                <tr>
+                  <th
+                    *ngFor="let hotTableTitleone of hotTableTitle">
+                    {{ hotTableTitleone.name }}
+                  </th>
+                </tr>
+                <tr
+                  *ngFor="let hotStandardDataone of hotStandardData">
+                  <td
+                    *ngFor="let hotTableTitleone of hotTableTitle">
+                    {{ hotStandardDataone[hotTableTitleone.id] }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="analyze-box" *ngIf="hotTableTitle.length">
+            <div class="table-box">
+              <table>
+                <tr>
+                  <th
+                    *ngFor="let hotDetectTableTitleCol of hotDetectTableTitle"
+                    [hidden]="hotDetectTableTitleCol.id === 'XLH' || hotDetectTableTitleCol.id === 'BHG' || hotDetectTableTitleCol.id === 'LCBH'">
+                    {{ hotDetectTableTitleCol.name }}
+                  </th>
+                </tr>
+                <tr
+                  *ngFor="let hotDetectDataone of hotDetectData"
+                  [ngClass]="{ isQualified: hotDetectDataone.BHG }">
+                  <td
+                    *ngFor="let hotDetectTableTitleCol of hotDetectTableTitle"
+                    [hidden]="hotDetectTableTitleCol.id === 'XLH' || hotDetectTableTitleCol.id === 'BHG' || hotDetectTableTitleCol.id === 'LCBH'">
+                    {{ hotDetectDataone[hotDetectTableTitleCol.id] }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="tips-info-box" *ngIf="hotTableTitle.length">
+            红色显示的为不合格
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="handle-box">
+    <div class="handle-box-left">
+      <ion-item>
+        <ion-label color="primary" style="line-height: 57px">
+          <strong>放行意见：</strong>
+        </ion-label>
+        <ion-textarea [(ngModel)]="fxidea" rows="3"></ion-textarea>
+      </ion-item>
+    </div>
+    <div class="handle-box-right">
+      <button ion-button round (click)="comfirmLetGo()">放行</button>
+      <button ion-button round (click)="dismissLetGo()">取消</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,60 @@
+page-home {
+  ion-content {
+    background-color: #f3f3f3 !important;
+  }
+  .bar-button-md {
+    font-size: 2.5rem;
+  }
+  .home-menu-box {
+    width: 100%;
+    background-color: #fff;
+    .menu-list-box {
+      width: 95%;
+      margin: 0 auto;
+      padding: 15px;
+      display: flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+      .menu-item-box {
+        box-sizing: border-box;
+        flex: 0 0 48%;
+        height: 150px;
+        margin: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 30px;
+        font-style: italic;
+        border-radius: 1.7rem;
+        &:nth-child(1) {
+          background: linear-gradient(to right, #02111D, #037BB5, #02111D);
+        }
+        &:nth-child(2) {
+          background: linear-gradient(to right, #076585, #fff);
+        }
+        &:nth-child(3) {
+          background: linear-gradient(to right, #e55d87, #5fc3e4);
+        }
+        &:nth-child(4) {
+          background: linear-gradient(to right, #fc354c, #0abfbc);
+        }
+        &:nth-child(5) {
+          background: linear-gradient(to right, #c02425, #f0cb35);
+        }
+        &:nth-child(6) {
+          background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+        }
+        &:nth-child(7) {
+          background: linear-gradient(to right, #11998e, #38ef7d);
+        }
+        &:nth-child(8) {
+          background: linear-gradient(to right, #feac5e, #c779d0, #4bc0c8);
+        }
+        &:nth-child(9) {
+          background: linear-gradient(to right, #43c6ac, #191654);
+        }
+      }
+    }
+  }
+}

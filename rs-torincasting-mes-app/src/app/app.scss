@@ -1,0 +1,53 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+:root {
+  --primary-color: rgb(0,128,128);
+}
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1535511490924'); /* IE9*/
+  src: url('iconfont.eot?t=1535511490924#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff'),
+  url('iconfont.ttf?t=1535511490924') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1535511490924#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 4rem;
+  font-style: normal;
+  color: var(--primary-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before { content: "\e688"; }
+
+.icon-scfk:before { content: "\e64b"; }
+
+.icon-lsylwt:before { content: "\e61a"; }
+
+.icon-zyzds:before { content: "\e619"; }
+
+.icon-zybzs:before { content: "\e63d"; }
+
+.icon-zoom-out:before { content: "\e70e"; }
+
+.icon-reset:before { content: "\e6dd"; }
+
+.icon-zoom-in:before { content: "\e616"; }

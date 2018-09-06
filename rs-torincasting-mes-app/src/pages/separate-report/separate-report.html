@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>隔离提报</ion-title>
+    <ion-buttons
+      *ngIf="lx === 'N'"
+      end>
+      <button ion-button icon-only (click)="addPhItem()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="separate-report-box">
+    <div class="table-box">
+      <ion-grid>
+        <ion-row>
+          <div class="table-box-header">
+            <ng-container
+              *ngFor="let tableTitleone of tableTitle">
+              <ion-col
+                *ngIf="tableTitleone.id !== 'XLH' && tableTitleone.id !== 'PH' && tableTitleone.id !== 'XZ' && tableTitleone.id !== 'CZ'">
+                {{ tableTitleone.name }}
+              </ion-col>
+              <ion-col *ngIf="tableTitleone.id === 'XLH' && lx === 'Y'">
+                {{ tableTitleone.name }}
+              </ion-col>
+              <ion-col *ngIf="tableTitleone.id === 'PH' && lx === 'N'">
+                {{ tableTitleone.name }}
+              </ion-col>
+              <ion-col *ngIf="tableTitleone.id === 'XZ' && lx === 'Y'">
+                {{ tableTitleone.name }}
+              </ion-col>
+              <ion-col *ngIf="tableTitleone.id === 'CZ' && lx === 'N'">
+                {{ tableTitleone.name }}
+              </ion-col>
+            </ng-container>
+          </div>
+        </ion-row>
+        <ion-row
+          class="table-line"
+          *ngFor="let separateReportDataone of separateReportData; let i = index ">
+          <ng-container
+            *ngFor="let tableTitleone of tableTitle">
+            <ion-col
+              *ngIf="tableTitleone.id !== 'SL' && tableTitleone.id !== 'XZ' && tableTitleone.id !== 'BZ' && tableTitleone.id !== 'CZ' && tableTitleone.id !== 'GLYY' && tableTitleone.id !== 'XLH' && tableTitleone.id !== 'PH' && !!separateReportDataone[tableTitleone.id]">
+              <span>
+                {{ separateReportDataone[tableTitleone.id] }}
+              </span>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'SL' && lx === 'Y'">
+              <span>
+                {{ separateReportDataone[tableTitleone.id] }}
+              </span>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'SL' && lx === 'N'">
+              <ion-select
+                cancelText="取消"
+                okText="确认"
+                [(ngModel)]="separateReportDataone[tableTitleone.id].value">
+                <ion-option
+                  *ngFor="let optionone of separateReportDataone[tableTitleone.id].options"
+                  [value]="optionone">
+                  {{ optionone }}
+                </ion-option>
+              </ion-select>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'XLH' && lx === 'Y'">
+              <span>
+                {{ separateReportDataone[tableTitleone.id] }}
+              </span>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'PH' && lx === 'N'">
+              <span>
+                {{ separateReportDataone[tableTitleone.id] }}
+              </span>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'GLYY'">
+              <ion-select
+                multiple
+                cancelText="取消"
+                okText="确认"
+                [(ngModel)]="separateReportDataone[tableTitleone.id].value">
+                <ion-option
+                  *ngFor="let optionone of separateReportDataone[tableTitleone.id].options"
+                  [value]="optionone.H_FKYY_YYID">
+                  {{ optionone.H_FKYY_YYMS }}
+                </ion-option>
+              </ion-select>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'XZ' && lx === 'Y'">
+              <ion-checkbox
+                [(ngModel)]="separateReportDataone[tableTitleone.id]">
+              </ion-checkbox>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'BZ'">
+              <ion-input
+                type="text"
+                [(ngModel)]="separateReportDataone[tableTitleone.id]">
+              </ion-input>
+            </ion-col>
+            <ion-col *ngIf="tableTitleone.id === 'CZ' && lx === 'N'">
+              <button
+                ion-button
+                (click)="deletePhItem(i)">
+                {{ separateReportDataone[tableTitleone.id] }}
+              </button>
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div class="separate-report-btn-box">
+    <button ion-button round block (click)="dismissApply()">取消</button>
+    <button ion-button round block (click)="confirmApply()">确定</button>
+  </div>
+</ion-content>

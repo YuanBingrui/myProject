@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>查看{{ documentName }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="pdf-view-box">
+    <pdf-viewer
+      class="pdf-view"
+      [src]="pdfSrc" 
+      [show-all]="true"
+      [original-size]="false"
+      [zoom]="zoomValue">
+    </pdf-viewer>
+    <div class="zoom-box">
+      <i class="iconfont-zoom icon-zoom-in" (click)="adjustVisibleArea('zoom-in')"></i>
+      <i class="iconfont-refresh icon-reset" (click)="adjustVisibleArea('refresh')"></i>
+      <i class="iconfont-zoom icon-zoom-out" (click)="adjustVisibleArea('zoom-out')"></i>
+    </div>
+  </div>
+</ion-content>

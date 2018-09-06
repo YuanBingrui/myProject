@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>首页</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="home-menu-box">
+    <div class="menu-list-box">
+      <div
+        class="menu-item-box"
+        *ngFor="let menuItem of menuList"
+        [hidden]="!menuItem.isShow"
+        (click)="navGotoFeedbackPage(menuItem)">
+        {{ menuItem.name }}
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,50 @@
+{
+  "name": "rs-oa-quasar",
+  "version": "1.0.0",
+  "description": "罗想OA App",
+  "productName": "罗想OA",
+  "cordovaId": "com.roadshare.cloudapp",
+  "author": "songjinke <jinke.song@roadshare.com>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue src",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "element-ui": "^2.3.6",
+    "moment": "^2.22.1",
+    "vue-i18n": "^7.3.3",
+    "vuelidate": "^0.6.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "devtron": "1.4.0",
+    "electron": "1.8.3",
+    "electron-debug": "1.5.0",
+    "electron-devtools-installer": "2.2.1",
+    "electron-packager": "11.1.0",
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.3.0",
+    "prettier": "1.11.1",
+    "quasar-cli": "^0.15.14"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}

@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle="menuList">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>行车投料作业反馈（一部）</ion-title>
+    <ion-buttons end>
+      <my-timer></my-timer>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <page-header [headerInfo]="headerInfo" (dateChange)="planDateFilter($event)"></page-header>
+  <div class="smelting-box-content">
+    <div class="smelting-box-content-top">
+      <div class="top-item-box smelting-box-content-top-left">
+        <div class="wl-view-box">
+          <span>
+            <strong>物料：</strong>
+          </span>
+          <span>{{ wlInfo.WLMC }}</span>
+        </div>
+        <div class="input-div-box">
+          <input
+            id="input"
+            class="input-box"
+            type="number"
+            pattern="[0-9]*"
+            [(ngModel)]="tlcz" />
+          <label for="input" class="input-border-box"></label>
+        </div>
+        <!-- <button ion-button (click)="getTlCz()">取值</button> -->
+      </div>
+      <div class="top-item-box smelting-box-content-top-right">
+        <button ion-button round (click)="confirmTl()">投料</button>
+      </div>
+    </div>
+    <div class="smelting-box-content-middle">
+      <div
+        class="smelting-furnace-box"
+        *ngFor="let furnaceone of furnaceArr; let i = index ">
+        <div
+          class="furnace-box"
+          [ngClass]="{ 'is-selected-furnace': furnaceone.id === selectedFurnaceId }"
+          (click)="selectedFurnace(furnaceone.id, i)">
+          {{ furnaceone.name }}
+        </div>
+        <div class="plans-box">
+          <ion-row>
+            <ion-col>
+              <ion-select
+                [selectOptions]="{title: '计划'}"
+                cancelText="取消"
+                okText="确认"
+                [disabled]="presentIndex !== i"
+                [(ngModel)]="furnaceone.plans.value"
+                (ionChange)="getSmeltingPlans(furnaceone.plans.value, i)">
+                <ion-option
+                  *ngFor="let optionone of furnaceone.plans.options"
+                  [value]="optionone">
+                  {{ optionone }}
+                </ion-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div class="detail-box">
+          <div class="table-box">
+            <div class="table-header">
+              <div
+                class="table-header-col"
+                *ngFor="let tableTitleone of tableTitle">
+                {{ tableTitleone.name }}
+              </div>
+            </div>
+            <div class="table-body">
+              <div
+                class="table-body-row"
+                *ngFor="let detailone of furnaceone.detailInfo">
+                <div
+                  class="table-body-col"
+                  *ngFor="let tableTitleone of tableTitle">
+                  <span *ngIf="tableTitleone.id !== 'YTSL'">
+                    {{ detailone[tableTitleone.id] }}
+                  </span>
+                  <span
+                    *ngIf="tableTitleone.id === 'YTSL'"
+                    (click)="goToSmeltingThrow(detailone, i)">
+                    {{ detailone[tableTitleone.id] }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="smelting-box-content-bottom">
+      <div
+        class="smelting-pit-box"
+        *ngFor="let rawMaterialPit of rawMaterialPits"
+        [ngClass]="{ 'is-selected-pit': rawMaterialPit.KW_KWID === selectedPitId }"
+        (click)="selectedPit(rawMaterialPit.KW_KWID, rawMaterialPit)">
+        {{ rawMaterialPit.KW_KWID }}
+      </div>
+    </div>
+  </div>
+</ion-content>

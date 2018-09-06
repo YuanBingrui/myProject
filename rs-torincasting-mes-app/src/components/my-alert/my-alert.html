@@ -1,0 +1,56 @@
+<div class="alter-box-cover" *ngIf="_isAlert">
+  <div class="alter-box">
+    <div class="alter-box-header"></div>
+    <div class="alter-box-content">
+      <div class="table-box">
+      <ion-grid>
+        <ion-row>
+          <div class="table-box-header">
+            <ion-col
+              *ngFor="let snTitleone of snTitle">
+              {{ snTitleone.name }}
+            </ion-col>
+          </div>
+        </ion-row>
+        <ion-row
+          class="table-line"
+          *ngFor="let serialNumberone of serialNumber; let i = index ">
+          <ion-col
+            *ngFor="let snTitleone of snTitle">
+            <span
+              *ngIf="snTitleone.id == 'XLH'">
+              {{ serialNumberone[snTitleone.id] }}
+            </span>
+            <button
+              *ngIf="snTitleone.id === 'SJSJ'"
+              ion-button
+              [innerHTML]="serialNumberone[snTitleone.id]"
+              (click)="myGetStartTime(i)">
+              <!-- {{ serialNumberone[snTitleone.id] }} -->
+            </button>
+            <button
+              *ngIf="snTitleone.id === 'ZJSJ'"
+              ion-button
+              [innerHTML]="serialNumberone[snTitleone.id]"
+              (click)="myGetEndTime(i)">
+              <!-- {{ serialNumberone[snTitleone.id] }} -->
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    </div>
+    <div class="alter-box-footer">
+      <button
+        class="alter-button alter-button-confirm"
+        (click)="myAlterConfirm()">
+        确定
+      </button>
+      <button
+        class="alter-button alter-button-cancel"
+        (click)="myAlterCancel()">
+        取消
+      </button>
+    </div>
+  </div>
+</div>

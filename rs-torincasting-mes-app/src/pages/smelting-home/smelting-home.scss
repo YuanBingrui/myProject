@@ -1,0 +1,218 @@
+page-smelting-home {
+  $primary-color: var(--primary-color);
+  ion-content {
+    background-color: #f3f3f3 !important;
+  }
+  .smelting-box-content {
+    background-color: #fff;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.7rem;
+    font-size: 2rem;
+    &-top {
+      display: flex;
+      // margin: 30px 0;
+      .top-item-box {
+        box-sizing: border-box;
+        padding: 10px 0;
+      }
+      &-left {
+        flex: 0 0 70%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .wl-view-box {
+          color: $primary-color;
+          font-size: 2.2rem;
+          padding: 0 2rem;
+        }
+        .input-div-box {
+          width: 45%;
+          height: 4rem;
+          position: relative;
+          z-index: 1;
+          vertical-align: top;
+          .input-border-box {
+            position: absolute;
+            /* left: 70px; */
+            width: 100%;
+            &:before, &:after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 50%;
+              height: 4rem;
+              border: 3px $primary-color solid;
+              transition: transform 0.3s;
+              z-index: 1;
+            }
+            &:before {
+              border-right: none;
+              border-top-left-radius: 40px;
+              border-bottom-left-radius: 40px;
+            }
+            &:after {
+              left: 50%;
+              border-left: none;
+              border-top-right-radius: 40px;
+              border-bottom-right-radius: 40px;
+            }
+          }
+          .input-box {
+            position: relative;
+            display: block;
+            float: right;
+            // left: 70px;
+            text-align: center;
+            border: none;
+            font-size: inherit;
+            width: 100%;
+            height: 100%;
+          }
+          .input-box:focus + .input-border-box:before {
+            transform: translate3d(-10%, 0, 0);
+          }
+          .input-box:focus + .input-border-box:after {
+            transform: translate3d(10%, 0, 0);
+          }
+        }
+        button {
+          font-size: inherit;
+          margin-right: 70px;
+          width: 15%;
+        }
+      }
+      &-right {
+        flex: 0 0 30%;
+        display: flex;
+        justify-content: flex-end; 
+        align-items: center;
+        button {
+          font-size: inherit;
+          width: 40%;
+          margin-right: 50px;
+        }
+      }
+    }
+    &-middle {
+      // width: 100%;
+      // padding: 20px;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      overflow-x: auto;
+      .smelting-furnace-box {
+        margin-top: 1.5rem;
+        width: 409px;
+        display: flex;
+        flex-shrink: 0;
+        flex-direction: column;
+        align-content: space-around;
+        .furnace-box {
+          width: 30%;
+          height: 80px;
+          background-color: #ccc;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-self: center;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .is-selected-furnace {
+          color: #fff;
+          background-color: #c9171e;
+        }
+        .plans-box {
+          height: 5rem;
+          width: 100%;
+          margin-top: 10px;
+          align-self: center;
+          & ion-select {
+            max-width: 100%;
+          }
+          & .select-text {
+            text-align: center;
+          }
+        }
+        .detail-box {
+          border: 1px #ccc solid;
+          margin-bottom: 10px;
+          width: 98%;
+          .table-box {
+            width: 95%;
+            margin: 10px auto;
+            @mixin col-common {
+              padding: 5px 10px;
+              font-family: Verdana;
+              border: 2px #fff solid;
+              border-radius: 7px;
+              box-sizing: border-box;
+              width: 33.3%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .table-header {
+              width: 100%;
+              height: 4rem;
+              display: flex;
+              &-col {
+                @include col-common;
+                font-size: 2.2rem;
+                font-weight: bold;
+              }
+            }
+            .table-body {
+              width: 100%;
+              height: 10.5rem;
+              overflow: auto;
+              &-row {
+                height: 3.5rem;
+                display: flex;
+              }
+              &-row:nth-child(even) > .table-body-col {
+                background-color: rgba(0, 128, 128, .4);
+              }
+              &-row:nth-child(odd) > .table-body-col {
+                background: #FFF;
+              }
+              &-col {
+                @include col-common;
+                font-size: 1.7rem;
+              }
+            }
+          }
+        }
+      }
+    }
+    &-bottom {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+      // padding: 20px;
+      border: 1px #ccc solid;
+      .smelting-pit-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1%;
+        background-color: $primary-color;
+        width: 8%;
+        height: 80px;
+        color: #fff;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .is-selected-pit {
+        color: $primary-color;
+        background-color: #fff;
+        border: 1px $primary-color solid;
+      }
+    }
+  }
+}
